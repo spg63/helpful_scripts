@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# This script calls a DMG mounting script on a remote server and sends a PW to the 
+# remote server in the $1 argument. Script fails if no password or multiple arguments
+#
+# Sean Grimes
+# 06.15.16
+
+if (( $# < 1 ))
+then
+	echo 'NO NO NO'
+	exit
+fi
+
+if (( $# > 1 ))
+then
+	echo 'NO NO NO'
+	exit
+fi
+
+ssh -p32021 -n SERVER_LOGIN_NAME@10.0.1.SERVER_IP_ADDR "mountData '$1'"
+if [ $? -ne 0 ]
+then
+    ssh -p32021 -n SERVER_LOGIN_NAME@SERVER_WEB_ADDR "mountData '$1'"
+    if [ $? -ne 0 ]
+    then
+        echo "Couldn't connect to server to mount data DMGs"
+        exit
+    fi
+fi

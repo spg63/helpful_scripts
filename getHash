@@ -1,0 +1,68 @@
+#!/usr/bin/env python
+#
+# Hash some files, has been setup to ignore certain files that I don't care about
+# new_hash, pre_hash take a path to log files if you're so inclined
+# Will deposit the .md5 files in the same directory as the files you're hashing
+#
+# By default this will not rehash any files that have an associated .md5 file. This can be changed
+# by removing the "elif os.path.exists(tmp + ".md5"): block of code. That block of code could also
+# be a good location to put new code in that compares the old hash value with the new one to track
+# data integrity changes (say after restoring a RAID volume or moving large amounts of data to a new
+# drive, etc...)
+
+# Sean Grimes
+# 01.15.16
+
+import os
+import formatter
+import hashlib
+import sys
+from os import walk
+
+def md5(fname):
+	hash = hashlib.md5()
+	with open(fname, "rb") as f:
+		for chunk in iter(lambda: f.read(4096), b""):
+			hash.update(chunk)
+	return hash.hexdigest()
+
+
+file_directory = os.getcwd()
+file_directory = os.path.abspath(file_directory)
+paths_to_hash = []
+path = []
+new_hash = "/Users/grimes/Documents/scripts/logs/new_hashes.txt"
+pre_hash = "/Users/grimes/Documents/scripts/logs/old_hashes.txt"
+new_file = open(pre_hash, 'w')
+new_file.write("\n")
+new_file.close()
+
+for root, dirs, filenames in os.walk(file_directory, topdown=False):
+	for name in filenames:
+		tmp = os.path.join(root, name)
+		f = tmp+".md5"
+		print tmp
+		
+		# Check if we already have a hash for this file
+		if tmp.endswith('.md5'):
+			continue
+		elif ".DS_Store" in tmp:
+			continue
+		elif ".Spotlight-V100" in tmp:
+			continue
+		elif ".Trashes" in tmp:
+			continue
+		elif ".fseventsd" in tmp:
+			continue
+		elif os.path.exists(tmp + ".md5"):
+			pre = open(pre_hash, 'a')
+			str = tmp + " already had a hash."
+			pre.write(tmp),
+			pre.write(" already had a hash.\n")
+			continue
+		else:
+			new2 = open(new_hash, 'a')
+			new2.write(tmp),
+			new2.write(" has now been hashed.\n")
+			file = open(f, 'w')
+			file.write(md5(tmp))

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Use openssl library and aes-256-cbc algorithm to encrypt given file
+# 
+# 04.01.16
+# Sean Grimes
+#
+
+if (( $# < 1 ))
+then
+	echo -e "
+			usage: encrypt filename [-d] \n \
+			-d optional, if there it will delete the original file
+			"
+fi
+
+if (( $# == 1 ))
+then
+	 # Remove the file extension
+	 file=${1%.*}
+	 # Use the openssl library to encrypt the file, output with .enc extension
+	 openssl enc -aes-256-cbc -salt -in $1 -out $file.encrypted
+fi
+
+if (( $# == 2 ))
+then
+	 if [ $2 == "-d" ]
+	 then
+		  file=${1%.*}
+	     openssl enc -aes-256-cbc -salt -in $1 -out $file.encrypted
+		  rm $1
+	 else
+		  echo -e "You passed an unrecognized argument"
+	 fi
+fi
+

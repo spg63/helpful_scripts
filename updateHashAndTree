@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+#
+# Command and control script to help automate the hashing and tree functions
+# This is used to track a directory that contains many sub-directories of files that need corruption
+# detection. This script hashes all files using the "getHash" script on a cron-job schedule then
+# updates the tree file so it contains an up-to-date accounting of what files exist in the 
+# directories. 
+#
+# Another script could be used to go through and compare hash results to ensure no changes
+#
+# Sean Grimes
+
+import os
+import subprocess
+from updateTreeFile import update_tree
+
+subprocess.call("getHash", shell=True)
+
+update_tree()
+
+
+

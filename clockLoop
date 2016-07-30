@@ -1,0 +1,16 @@
+#!/bin/bash
+# run while loop to display date and hostname on screen ##
+#
+# NOTE: I am not the author of this, can't find the original post anymore but it was found
+#       on stackoverflow. Thanks random person!
+#
+
+while [ : ]
+do
+	clear
+	tput cup 5 5
+	date
+	tput cup 6 5
+	echo "Hostname : $(hostname)"
+	sleep 1
+done

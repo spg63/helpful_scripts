@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# Showing how to detach a DMG from the command line on OSX
+#
+# Sean Grimes
+# 06.15.16
+
+hdiutil detach /Volumes/DMG_TO_DETACH
+hdiutil detach /Volumes/ANOTHER_DMG_TO_DETACH

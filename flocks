@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# Helpful in diagnosing file-lock issues when attempting to empty the trash
+# NOTE: items will be displayed that do not prevent trash from being emptied, this is only
+#       a first step in finding the problem
+# 
+# Sean Grimes
+
+echo "Searching...."
+lsof | grep Trash

@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# Showing how to forcefully detach a DMG from command line on OSX
+# Not recommended for use unless you really need to force detach something
+# e.g. You really need to leave and the TimeMachine DMG just won't unmount
+#
+# Sean Grimes
+# 06.15.16
+
+hdiutil detach -force /Volumes/DMG_TO_FORCE_DETACH
+hdiutil detach -force /Volumes/ANOTHER_DMG_TO_FORCE_DETACH

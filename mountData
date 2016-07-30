@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# How to use hdiutil to locally mount an encrypted DMG that requires a complex password
+# The password is stored in a file, encrypted with the openssl library. The PW file is decrypted, 
+# the PW is read into memory and passed to hdiutil then the decrypted PW file is removed with the
+# srm command. In theory this is secure for 99% of users out there...however if you're being watched
+# by any 3 letter agencies I would avoid this as the unencrypted password does live on your drive
+# for a (very) short amount of time
+#
+# Sean Grimes
+#
+
+if (( $# < 1 ))
+then
+	echo 'No....just no'
+fi
+
+if (( $# > 1 ))
+then
+	echo 'No....just no'
+fi
+
+# Use openssl to decrypt the encrypted password file, write it to a temp file. The password to 
+# decrypt the file is passed as a cmdline argument
+openssl aes-256-cbc -in /Volumes/PATH/TO/PW_FILE -out passwd.tmp -d -pass pass:$1
+
+# Use the decrypted password to mount the encrypted DMG
+cat passwd.tmp | hdiutil attach /Volumes/PATH/TO/ENCRYPTED/DMG.sparsebundle -stdinpass
+
+# Use srm to remove the decrypted password
+srm -f passwd.tmp

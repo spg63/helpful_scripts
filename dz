@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+# Another TA shortcut script for getting student files ready for grading and cleanup
+#
+# Sean Grimes
+
+rm -f *.zip

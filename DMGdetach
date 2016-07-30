@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# Showing how to call a script on a remote server, in this case the "detach" script
+# would live on the remote server, and this script is ssh-ing into the server using
+# a custom port and calling that script
+#
+# The script displays how to handle connecting to the server by first testing a local network
+# connection, and if that's not available (i.e. you're not on the local network) falling
+# back to a DNS routed connection
+#
+# Sean Grimes
+# 06.15.16
+#
+
+ssh -p32021 -n SERVER_LOGIN_USERNAME@10.0.1.SERVER_IP_ADDR "detach"
+# If connection not successful, fallback to DNS routed connection
+if [ $? -ne 0 ]
+then
+    ssh -p32021 -n SERVER_LOGIN_USERNAME@SERVER_WEB_ADDR "detach"
+    if [ $? -ne 0 ]
+    then
+        # We failed again, oh well...tell the user
+        echo "Couldn't connect to server"
+        exit
+    fi
+fi

@@ -1,0 +1,9 @@
+#!/bin/bash
+# Sean Grimes
+# 10.25.14
+#
+# Simple bash script that displays the dirs and files in the current directory
+#	in a simple tree like structure
+# See example output of this directory in "sample_tree.txt"
+
+find ./ | sed -e 's/[^-][^\/]*\//--/g;s/--/ |-/'

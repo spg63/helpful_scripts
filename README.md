@@ -4,7 +4,7 @@ These are a small handful of scripts I've written over the past year or 2 that h
 Many of the scripts can be chained together to produce more useful work; an example of this would be "updateHashAndTree" which makes use of "tree", "getHash", and "updateTreeFile.py" to eliminate any manual work that needs to be done in hashing files and maintaining a file-tracking file.
 Small modifications can be made to the scripts to make them more useful, e.g. "getHash" can be quickly modified to comapre old and new hash values to check for data integrity. 
 
-The scripts should contain sufficient comments to understand what they are doing. Most have a header comment that talks about the purpose of the script. 
+The scripts should contain sufficient comments to understand what they are doing. Most have a header comment that talks about the purpose of the script. Some 'scripts' (like cj, dz, oz) are very short single commands. It's a bit of a stretch to call them scripts, but whatever saves you time!
 
 Some scripts are macOS specific, others will work just fine on other *nix. The macOS specific scripts are mostly in relation to handling disk image files with hdiutil.
 

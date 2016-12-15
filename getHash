@@ -31,8 +31,8 @@ file_directory = os.getcwd()
 file_directory = os.path.abspath(file_directory)
 paths_to_hash = []
 path = []
-new_hash = "/Users/grimes/Documents/scripts/logs/new_hashes.txt"
-pre_hash = "/Users/grimes/Documents/scripts/logs/old_hashes.txt"
+new_hash = "/Users/PATH/TO/STORE/new_hashes.txt"
+pre_hash = "/Users/PATH/TO/STOREold_hashes.txt"
 new_file = open(pre_hash, 'w')
 new_file.write("\n")
 new_file.close()
